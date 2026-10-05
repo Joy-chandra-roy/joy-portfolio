@@ -10,7 +10,11 @@ import {
   Folder,
   Mail,
   Download,
+  Menu,
 } from "lucide-react";
+
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
@@ -30,18 +34,17 @@ const Navbar = () => {
         <Link href="/" className="font-bold text-4xl">
           Joy{" "}
         </Link>
-        <nav className="flex items-center gap-8 text-xl ">
-          {navLinks.map((item, index) => {
+        <nav className="md:flex items-center gap-8 text-xl hidden ">
+          {navLinks.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 href={item.href}
-                key={index}
+                key={item.href}
                 className={
                   pathname === item.href
                     ? "flex items-center gap-2 text-green-500 border px-2 py-1 rounded-2xl shadow-xl"
                     : "flex items-center gap-2 transition-colors hover:text-green-500"
-                    
                 }
               >
                 <Icon size={18} />
@@ -50,6 +53,7 @@ const Navbar = () => {
             );
           })}
         </nav>
+
         <div className="flex items-center space-x-3">
           <LanguageSwitcher />
           <Button>
@@ -57,6 +61,28 @@ const Navbar = () => {
             Resume
           </Button>
         </div>
+
+        {/* mobile menu */}
+        <Sheet>
+          <SheetTrigger className="md:hidden">
+            <Menu size={22} />
+          </SheetTrigger>
+
+          <SheetContent className="pl-8  pt-3">
+            <SheetTitle className="text-4xl font-bold">Joy </SheetTitle>
+          {
+            navLinks.map((item)=>{
+               const Icon = item.icon;
+              return(
+                <Link href={item.href} key={item.href} className="flex items-center gap-3 py-2 text-lg transition-colors hover:text-green-500">
+                  <Icon size={18} />
+                  {item.name}
+                  </Link>
+              )
+            })
+          }
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
