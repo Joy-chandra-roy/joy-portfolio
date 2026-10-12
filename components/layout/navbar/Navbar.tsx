@@ -29,7 +29,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className=" bg-white border-b shadow-sm ">
+    <header className=" bg-white border-b shadow-sm sticky top-0 z-50  ">
       <div className="container mx-auto flex h-20 justify-between items-center px-5">
         <Link href="/" className="font-bold text-4xl">
           Joy{" "}
